@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Mihir",
+    "playerpoints": "23",
+    "online": "false"
+  },
+  {
+    "playername": "Dhiraj",
+    "playerpoints": "21",
+    "online": "true"
+  },
+  {
+    "playername": "tom",
+    "playerpoints": "20",
+    "online": "true"
+  },
+  {
+    "playername": "jerry",
+    "playerpoints": "15",
+    "online": "false"
+  }
+]

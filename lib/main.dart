@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ispy/signinPage.dart';
-import 'package:ispy/splashscreen.dart';
+import 'package:ispy/pages/signinPage.dart';
+import 'package:ispy/pages/splashscreen.dart';
 
 void main() {
   runApp(const MyApp());
