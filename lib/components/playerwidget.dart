@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class playerWidget extends StatefulWidget {
   final bool isPlayerOnline;
   final String playerName;
-  final int playerPoints;
+  final String playerPoints;
   const playerWidget(
       {Key? key,
       required this.playerName,

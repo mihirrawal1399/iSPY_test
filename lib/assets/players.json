@@ -2,21 +2,46 @@
   {
     "name": "Mihir",
     "playerpoints": "23",
-    "online": "false"
+    "online": false
   },
   {
-    "playername": "Dhiraj",
+    "name": "Dhiraj",
     "playerpoints": "21",
-    "online": "true"
+    "online": true
   },
   {
-    "playername": "tom",
+    "name": "tom",
     "playerpoints": "20",
-    "online": "true"
+    "online": true
   },
   {
-    "playername": "jerry",
+    "name": "jerry",
     "playerpoints": "15",
-    "online": "false"
+    "online": false
+  },
+  {
+    "name": "rahul",
+    "playerpoints": "16",
+    "online": false
+  },
+  {
+    "name": "akshay",
+    "playerpoints": "19",
+    "online": false
+  },
+  {
+    "name": "shubham",
+    "playerpoints": "11",
+    "online": false
+  },
+  {
+    "name": "saurabh",
+    "playerpoints": "22",
+    "online": false
+  },
+  {
+    "name": "nikhil",
+    "playerpoints": "15",
+    "online": false
   }
 ]

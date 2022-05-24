@@ -5,13 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:ispy/components/playerwidget.dart';
 
 class PlayersList extends StatefulWidget {
-  final String userName;
-
+  String userName;
   String? name;
   String? playerpoints;
-  String? online;
+  bool? online;
 
-  const PlayersList(
+  PlayersList(
       {Key? key,
       required this.userName,
       this.name,
@@ -33,20 +32,31 @@ class PlayersList extends StatefulWidget {
     return data;
   }
 
-  Future<List<PlayersList>> ReadJsonData() async {
-    //read json file
-    final jsondata = await rootBundle.loadString('./lib/players.json');
-    //decode json data as list
-    final list = json.decode(jsondata) as List<dynamic>;
-    //map json and initialize using DataModel
-    return list.map((e) => PlayersList.fromJson(e)).toList();
-  }
+  // Future<List<PlayersList>> ReadJsonData() async {
+  //   //read json file
+  //   final jsondata = await rootBundle.loadString('./lib/players.json');
+  //   //decode json data as list
+  //   final list = json.decode(jsondata) as List<dynamic>;
+  //   //map json and initialize using DataModel
+  //   return list.map((e) => PlayersList.fromJson(e, userName)).toList();
+  // }
 
   @override
   State<PlayersList> createState() => _PlayersListState();
 }
 
 class _PlayersListState extends State<PlayersList> {
+
+  late ScrollController _controller;
+
+  @override
+  void initState() {
+    _controller = ScrollController();
+    _controller.addListener(_scrollListener);
+    ReadJsonData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +65,7 @@ class _PlayersListState extends State<PlayersList> {
       ),
       backgroundColor: Colors.white,
       body: Container(
+        //height: MediaQuery.of(context).size.height * 0.95,
         child: Column(
           children: [
             Container(
@@ -67,13 +78,60 @@ class _PlayersListState extends State<PlayersList> {
                 textAlign: TextAlign.center,
               ),
             ),
-            playerWidget(
-                playerName: "Mihir", playerPoints: 23, isPlayerOnline: false),
-            playerWidget(
-                playerName: "Beurus", playerPoints: 21, isPlayerOnline: true)
+            FutureBuilder(
+              future: ReadJsonData(),
+              builder: (context, data){
+                if (data.hasError) {
+                  return Center(child: Text("${data.error}"),);
+                } else if (data.hasData){
+                  var items = data.data as List<PlayersList>;
+                  return Expanded(
+                    child: ListView.builder(
+
+                        controller: _controller,
+                      //shrinkWrap: true,
+                      itemCount: items == null ? 0 : items.length,
+                        itemBuilder: (context, index) {
+                        return playerWidget(playerName: items[index].name!, playerPoints: items[index].playerpoints!, isPlayerOnline: items[index].online!);
+                        }
+                    ),
+                  );
+                } else {
+                  return Text("Loading...");
+                  // return Center(
+                  //   child: CircularProgressIndicator(),
+                  // );
+                }
+              },
+            )
           ],
         ),
       ),
     );
   }
+
+  Future<List<PlayersList>> ReadJsonData() async {
+    //read json file
+    final jsondata = await rootBundle.loadString('./lib/assets/players.json');
+    //decode json data as list
+    final list = json.decode(jsondata) as List<dynamic>;
+    //map json and initialize using DataModel
+    return list.map((e) => PlayersList.fromJson(e,widget.userName)).toList();
+  }
+
+  _scrollListener() {
+    if (_controller.offset >= _controller.position.maxScrollExtent &&
+        !_controller.position.outOfRange) {
+      setState(() {//you can do anything here
+      });
+    }
+    if (_controller.offset <= _controller.position.minScrollExtent &&
+        !_controller.position.outOfRange) {
+      setState(() {//you can do anything here
+      });
+    }
+  }
+
 }
+
+
