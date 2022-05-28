@@ -1,13 +1,17 @@
+
 import 'package:flutter/material.dart';
+import 'package:ispy/pages/onlinePlayersList.dart';
 import 'package:ispy/pages/signinPage.dart';
 import 'package:ispy/pages/splashscreen.dart';
+import 'package:ispy/pages/takePicture.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+
+  MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override

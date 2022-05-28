@@ -46,7 +46,6 @@ class PlayersList extends StatefulWidget {
 }
 
 class _PlayersListState extends State<PlayersList> {
-
   late ScrollController _controller;
 
   @override
@@ -80,27 +79,29 @@ class _PlayersListState extends State<PlayersList> {
             ),
             FutureBuilder(
               future: ReadJsonData(),
-              builder: (context, data){
+              builder: (context, data) {
                 if (data.hasError) {
-                  return Center(child: Text("${data.error}"),);
-                } else if (data.hasData){
+                  return Center(
+                    child: Text("${data.error}"),
+                  );
+                } else if (data.hasData) {
                   var items = data.data as List<PlayersList>;
                   return Expanded(
                     child: ListView.builder(
-
                         controller: _controller,
-                      //shrinkWrap: true,
-                      itemCount: items == null ? 0 : items.length,
+                        //shrinkWrap: true,
+                        itemCount: items == null ? 0 : items.length,
                         itemBuilder: (context, index) {
-                        return playerWidget(playerName: items[index].name!, playerPoints: items[index].playerpoints!, isPlayerOnline: items[index].online!);
-                        }
-                    ),
+                          return playerWidget(
+                              playerName: items[index].name!,
+                              playerPoints: items[index].playerpoints!,
+                              isPlayerOnline: items[index].online!);
+                        }),
                   );
                 } else {
-                  return Text("Loading...");
-                  // return Center(
-                  //   child: CircularProgressIndicator(),
-                  // );
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }
               },
             )
@@ -116,22 +117,21 @@ class _PlayersListState extends State<PlayersList> {
     //decode json data as list
     final list = json.decode(jsondata) as List<dynamic>;
     //map json and initialize using DataModel
-    return list.map((e) => PlayersList.fromJson(e,widget.userName)).toList();
+    return list.map((e) => PlayersList.fromJson(e, widget.userName)).toList();
   }
 
   _scrollListener() {
     if (_controller.offset >= _controller.position.maxScrollExtent &&
         !_controller.position.outOfRange) {
-      setState(() {//you can do anything here
+      setState(() {
+        //you can do anything here
       });
     }
     if (_controller.offset <= _controller.position.minScrollExtent &&
         !_controller.position.outOfRange) {
-      setState(() {//you can do anything here
+      setState(() {
+        //you can do anything here
       });
     }
   }
-
 }
-
-
