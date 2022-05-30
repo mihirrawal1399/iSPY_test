@@ -2,9 +2,8 @@
 import 'package:file/file.dart';
 
 import 'package:flutter/material.dart';
+import 'package:ispy/components/ImageInput.dart';
 import 'package:ispy/pages/takePicture.dart';
-
-import 'Input_Image.dart';
 
 class playerWidget extends StatefulWidget {
   final bool isPlayerOnline;
@@ -38,7 +37,7 @@ class _playerWidgetState extends State<playerWidget> {
           child: InkWell(
             onTap: (){Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => InputImg(_selectedImg)),
+              MaterialPageRoute(builder: (context) => ImageInput()),
             );},
             child: Row(
               mainAxisSize: MainAxisSize.max,
